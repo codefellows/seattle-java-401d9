@@ -3,6 +3,7 @@
 ## Agenda
 
 - Announcements
+  - Keep letting me know if there are issues around the course split!
   - Feedback results review
   - First Career Coaching workshop will be next Friday
     - Career coaching assignments due on or before that day will lock on Friday
