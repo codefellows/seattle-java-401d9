@@ -16,6 +16,12 @@
 1. Name one of the SOLID principles that resonated with you. Why did it resonate?
 2. Name one of the SOLID principles that didn't make sense or didn't seem useful. What confuses you about it?
 
+## JSON Warmup Questions
+
+1. What is JSON?
+1. What does JSON look like?
+1. Why do we use JSON?
+
 ## Lecture Notes
 
 ### Reading JSON
