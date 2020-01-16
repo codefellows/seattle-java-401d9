@@ -4,6 +4,7 @@
 
 - Announcements
     - Partner Power Hour tomorrow! Make sure you attend well.
+    - Happy hour tonight starting at 4:30. Either attend or don't, and if you're planning to attend, please register!
 - Code review
     - LinkedLists
     - GSON
