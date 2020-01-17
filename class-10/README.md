@@ -3,6 +3,7 @@
 ## Agenda
 
 - Announcements
+    - Reminder: Code Fellows is a scent-free space! Please leave your perfume/cologne/body spray at home.
 - Code review
     - LinkedLists
     - The Internet
@@ -12,6 +13,7 @@
 - Lecture
     - Stacks
     - Queues
+- Preview of Spring
 
 ## Warmup Questions
 
