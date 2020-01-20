@@ -11,6 +11,7 @@
 
 * Announcements
     * Don't forget that career coaching is coming on Friday!
+    * Canvas updated its gradebook over the weekend, and it has subtly altered some assignments. If anything seems off, or if TAs aren't doing re-grades, please let us know--we're all learning/adjusting to it on the fly.
     * Feedback review
 * Code review
     * Stacks & Queues
