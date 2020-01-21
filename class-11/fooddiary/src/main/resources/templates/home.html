@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Food Diary</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <h1>Food Diary</h1>
+    <h3 th:text="${username}">Will Never Be Shown</h3>
+
+    <span th:each="entry : ${entries}">
+        <h4 th:text="${entry.food}"></h4>
+        <h5 th:text="${entry.date} + ', ' + ${entry.calories} + ' calories'"></h5>
+        <p th:text="${entry.notes}"></p>
+    </span>
+</body>
+</html>
