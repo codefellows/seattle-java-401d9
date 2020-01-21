@@ -1,0 +1,19 @@
+h1 {
+    background-color: #FFBBBB;
+}
+
+.subtitle {
+    font-size: 0.7em;
+    color: #555;
+}
+
+h4 {
+    margin: 10px 0 0 0;
+}
+
+.entry {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+}
