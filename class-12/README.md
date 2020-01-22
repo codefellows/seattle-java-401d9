@@ -8,20 +8,20 @@
 
 ## Agenda
 
-- Announcements
-- Code review
-    - Stacks using two queues
-    - Spring apps
-- Daily Systems: stdout, stderr, /dev/null
-- Lecture
-    - Adding Views to our MVC
-    - Adding Models to our MVC
-        - Using the `application.properties` file
-        - Defining schema
-        - Defining repository interface & model class
-        - Using repository interface in code
-        - Heroku considerations
-- Lab intro
+* Announcements
+* Code review
+    * Stacks using two queues
+    * Spring apps
+* Daily Systems: stdout, stderr, /dev/null
+* Lecture
+    * Adding Views to our MVC
+    * Adding Models to our MVC
+        * Using the `application.properties` file
+        * Defining schema
+        * Defining repository interface & model class
+        * Using repository interface in code
+        * Heroku considerations
+* Lab intro
 
 ## Warmup Question
 
