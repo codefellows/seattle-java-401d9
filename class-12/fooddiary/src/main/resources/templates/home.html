@@ -15,5 +15,13 @@
         <div class="subtitle" th:text="${entry.date} + ', ' + ${entry.calories} + ' calories'"></div>
         <p th:text="${entry.notes}"></p>
     </div>
+    <h3>Add an Entry</h3>
+    <form method="post" action="/entries">
+        <input name="potato" />
+        <input type="number" name="calories" />
+        <input type="text" name="date" />
+        <input name="notes" />
+        <input type="submit" />
+    </form>
 </body>
 </html>
