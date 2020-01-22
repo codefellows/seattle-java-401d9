@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Food Diary</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <h1>Food Diary</h1>
+    <h3 th:text="${username}">Will Never Be Shown</h3>
+
+    <div class="entry" th:each="entry : ${entries}">
+        <h4 th:text="${entry.food}"></h4>
+        <div class="subtitle" th:text="${entry.date} + ', ' + ${entry.calories} + ' calories'"></div>
+        <p th:text="${entry.notes}"></p>
+    </div>
+    <h3>Add an Entry</h3>
+    <form method="post" action="/entries">
+        <input name="potato" />
+        <input type="number" name="calories" />
+        <input type="text" name="date" />
+        <input name="notes" />
+        <input type="submit" />
+    </form>
+</body>
+</html>
