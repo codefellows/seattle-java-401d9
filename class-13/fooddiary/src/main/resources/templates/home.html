@@ -11,9 +11,19 @@
     <h3 th:text="${username}">Will Never Be Shown</h3>
 
     <div class="entry" th:each="entry : ${entries}">
-        <h4 th:text="${entry.food}"></h4>
-        <div class="subtitle" th:text="${entry.date} + ', ' + ${entry.calories} + ' calories'"></div>
+        <div class="subtitle" th:text="${entry.date}"></div>
         <p th:text="${entry.notes}"></p>
+        <h5 th:each="food : ${entry.foods}">
+            <span th:text="${food.name}"></span>,
+            with <span th:text="${food.calories}"></span> calories
+        </h5>
+
+        <form th:action="${'/entries/' + entry.id + '/foods'}" method="POST">
+            <input type="text" name="name" />
+            <input type="number" name="calories" />
+            <input type="submit" />
+        </form>
+
     </div>
     <h3>Add an Entry</h3>
     <form method="post" action="/entries">

@@ -1,11 +1,14 @@
 package com.ferreirae.fooddiary;
 
+import com.ferreirae.fooddiary.model.Food;
 import com.ferreirae.fooddiary.model.FoodDiaryEntry;
 import com.ferreirae.fooddiary.model.FoodDiaryEntryRepository;
+import com.ferreirae.fooddiary.model.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -17,6 +20,9 @@ public class FoodDiaryController {
 
     @Autowired
     FoodDiaryEntryRepository repo;
+
+    @Autowired
+    FoodRepository foodRepo;
 
     @GetMapping("/")
     public String getHome(Model m) {
@@ -44,8 +50,19 @@ public class FoodDiaryController {
 
     @PostMapping("/entries")
     public RedirectView addEntry(String potato, int calories, Date date, String notes) {
-        FoodDiaryEntry newEntry = new FoodDiaryEntry(potato, date, calories, notes);
+        FoodDiaryEntry newEntry = new FoodDiaryEntry(date, notes);
         repo.save(newEntry);
+        return new RedirectView("/");
+    }
+
+    @PostMapping("/entries/{id}/foods")
+    public RedirectView addFood(@PathVariable Long id, String name, int calories) {
+        Food food = new Food(name, calories);
+        // link food and entry
+        FoodDiaryEntry entry = repo.getOne(id);
+        food.setEntry(entry);
+        foodRepo.save(food);
+
         return new RedirectView("/");
     }
 }
