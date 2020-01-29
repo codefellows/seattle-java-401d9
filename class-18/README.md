@@ -3,8 +3,10 @@
 ## Agenda
 
 - Announcements
+  - Lock dates were just fixed for our Canvas course, so assignments will actually open/lock when they should now!
+  - Depending on progress/timing, Friday's lecture should be on the smaller side, and probably feature a practice whiteboard.
+  - Whiteboard practice signups for next week are coming out soon!
 - Code review
-- Daily Systems: review
 - Lecture
 - Lab intro
 
