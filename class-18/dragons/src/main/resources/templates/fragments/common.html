@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+    <th:block th:fragment="head">
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <title>Dragons!</title>
+    </th:block>
+    <nav th:fragment="nav">
+        <a href="/">Home</a>
+        <span th:if="${user}">
+            <span>Welcome, <span th:text="${user.username}"></span>!</span>
+            <a href="/logout">Log out</a>
+        </span>
+        <span th:unless="${user}">
+            <a href="/login">Log in</a>
+            <a href="/signup">Sign up</a>
+        </span>
+
+    </nav>
+
+</body>
+</html>

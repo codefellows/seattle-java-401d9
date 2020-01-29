@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <th:block th:replace="fragments/common :: head"></th:block>
+</head>
+<body>
+    <h1>Dragons Homepage</h1>
+    <nav th:replace="fragments/common :: nav"></nav>
+
+    <div>
+        <div th:each="dragon : ${user?.dragons}">
+            <h4 th:style="'background-color: ' + ${dragon.color}">Dragon! [[${dragon.horns}]] horns
+            <form method="POST" th:action="'/dragons/' + ${dragon.id}">
+                <input type="hidden" name="_method" value="delete" />
+                <input type="submit" />
+            </form>
+            </h4>
+        </div>
+    </div>
+    <h3 th:if="${user}">Add a Dragon!</h3>
+    <form th:if="${user}" action="/dragons" method="POST">
+        <label>Horns<input type="number" name="horns"/></label>
+        <label>Color<input type="color" name="color"/></label>
+        <label>Can Breathe Fire <input type="checkbox" name="canBreatheFire" /></label>
+        <input type="submit" />
+    </form>
+</body>
+</html>

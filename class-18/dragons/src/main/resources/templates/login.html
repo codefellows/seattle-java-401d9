@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <th:block th:replace="fragments/common :: head"></th:block>
+</head>
+<body>
+    <h1>Log In to Dragons</h1>
+    <nav th:replace="fragments/common :: nav"></nav>
+    <form method="POST" action="/login">
+        <label>Username<input name="username"/></label>
+        <label>Password <input type="password" name="password" /></label>
+        <input type="submit" />
+    </form>
+</body>
+</html>
