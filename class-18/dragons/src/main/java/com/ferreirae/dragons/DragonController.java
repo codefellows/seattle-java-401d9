@@ -40,4 +40,19 @@ public class DragonController {
         }
         return new RedirectView("/");
     }
+
+    @PostMapping("/dragons/{id}/help")
+    public RedirectView helpDragon(@PathVariable long id, long helpedDragon) {
+        // what dragon is trying to help which other dragon?
+
+        // how do we make that actually true in our DB?
+        Dragon helpingDragon = dragonRepository.getOne(id);
+        Dragon receiverDragon = dragonRepository.getOne(helpedDragon);
+
+        // Add my receiver dragon to the list of dragons that helpingDragon has helped
+        helpingDragon.getDragonsIHaveDoneNiceThingsFor().add(receiverDragon);
+        // Save that helpingDragon to the db, since I just modified it
+        dragonRepository.save(helpingDragon);
+        return new RedirectView("/");
+    }
 }

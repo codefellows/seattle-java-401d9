@@ -9,13 +9,30 @@
     <nav th:replace="fragments/common :: nav"></nav>
 
     <div>
-        <div th:each="dragon : ${user?.dragons}">
-            <h4 th:style="'background-color: ' + ${dragon.color}">Dragon! [[${dragon.horns}]] horns
+        <div th:each="dragon : ${user?.dragons}" th:style="'background-color: ' + ${dragon.color}">
+            <h4>Dragon! [[${dragon.horns}]] horns
+            </h4>
+            Dragons I have helped:
+            <div th:each="helpedDragon : ${dragon.dragonsIHaveDoneNiceThingsFor}" th:style="'background-color: ' + ${helpedDragon.color}">
+                [[${helpedDragon.horns}]]
+            </div>
+
+            Dragons who have helped me:
+            <div th:each="helpedDragon : ${dragon.dragonsWhoHaveDoneNiceThingsForMe}" th:style="'background-color: ' + ${helpedDragon.color}">
+                [[${helpedDragon.horns}]]
+            </div>
+            <form th:action="'/dragons/' + ${dragon.id} + '/help'" method="POST">
+                <h5>Help another dragon!</h5>
+                <select name="helpedDragon">
+                    <option th:each="dragon : ${user.dragons}" th:value="${dragon.id}">[[${dragon.horns}]]</option>
+                </select>
+                <input type="submit" value="Be Helpful!"/>
+            </form>
             <form method="POST" th:action="'/dragons/' + ${dragon.id}">
                 <input type="hidden" name="_method" value="delete" />
-                <input type="submit" />
+                <input type="submit" value="Delete" />
             </form>
-            </h4>
+
         </div>
     </div>
     <h3 th:if="${user}">Add a Dragon!</h3>
