@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurants</title>
+</head>
+<body>
+    <h1>All the Restaurants</h1>
+
+    <div th:each="restaurant : ${restaurants}">
+        <a th:href="'/restaurants/' + ${restaurant.id}" th:text="${restaurant}"></a>
+    </div>
+</body>
+</html>

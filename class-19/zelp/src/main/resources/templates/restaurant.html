@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 th:text="${restaurant}">Restaurant</h1>
+    <h2>Reviews</h2>
+    <ul>
+        <li th:each="review : ${restaurant.reviews}" th:text="${review}"></li>
+    </ul>
+    <section>
+        <h4>Restaurants I like:</h4>
+        <ul>
+            <li th:each="rest : ${restaurant.restaurantsILike}">
+                <a th:href="'/restaurants/' + ${rest.id}">[[${rest}]]</a>
+            </li>
+        </ul>
+    </section>
+    <h4>Update me!</h4>
+    <form method="post" th:action="'/restaurants/' + ${restaurant.id}">
+        <input type="hidden" name="_method" value="put" />
+        <label>Name <input name="name" th:value="${restaurant.name}" /></label>
+        <label>Price <input type="number" name="price" th:value="${restaurant.price}"/></label>
+        <input type="submit" />
+    </form>
+</body>
+</html>
