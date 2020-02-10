@@ -4,6 +4,9 @@
 
 - Announcements
     - Michelle leaving right after lecture tomorrow
+    - One week from today, Feb 17, we'll take the day off for President's Day
+    - This Friday is career coaching
+    - Feedback review
 - Lecture
     - Android Studio intro/reminders & WYSIWYG editor
     - Event listeners: they're the same as in JS
@@ -13,6 +16,19 @@
 ## Warmup Question
 
 1. You're writing frontend JavaScript, and you want to console.log when a button is clicked. What do you need to do?
+
+## Feedback Review
+
+### The Good/The Most Helpful
+
+- Practice interviews
+- Project week and getting to build something self-directed
+
+### The Bad/The Least Helpful
+
+- no trends!
+
+## Lecture Overview
 
 ### Creating a new project
 
