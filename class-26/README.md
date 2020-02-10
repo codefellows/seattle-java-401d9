@@ -6,6 +6,7 @@
     - Michelle leaving right after lecture tomorrow
     - One week from today, Feb 17, we'll take the day off for President's Day
     - This Friday is career coaching
+    - Two weeks from now is The Great Course Recombining
     - Feedback review
 - Lecture
     - Android Studio intro/reminders & WYSIWYG editor
