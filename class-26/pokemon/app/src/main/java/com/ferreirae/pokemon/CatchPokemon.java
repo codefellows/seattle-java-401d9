@@ -2,6 +2,7 @@ package com.ferreirae.pokemon;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,5 +21,12 @@ public class CatchPokemon extends AppCompatActivity {
         Log.i("mnf.CatchPokemon", t.getText().toString());
         // kill the current activity
         this.finish();
+    }
+
+    public void viewPokemon(View v) {
+        Intent i = new Intent(this, ViewPokemonActivity.class);
+        EditText pokemonNameEditText = findViewById(R.id.pokemonName);
+        i.putExtra("pokemonName", pokemonNameEditText.getText().toString());
+        startActivity(i);
     }
 }

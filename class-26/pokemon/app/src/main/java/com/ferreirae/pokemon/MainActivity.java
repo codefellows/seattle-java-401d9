@@ -1,12 +1,15 @@
 package com.ferreirae.pokemon;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         // setup work
         // logging: verbose, debug, info, warning, error, wtf
         Log.d(TAG, "we are in onCreate");
+
+
         View b = findViewById(R.id.button);
         // anonymous inner class: define a class that implements View.OnClickListener, right here inline
 //        b.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void onSettingsButtonPressed(View v) {
+        Intent i = new Intent(this, SettingsActivity.class);
+        startActivity(i);
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -52,6 +62,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.i(TAG, "resumed");
+
+        // set color scheme of the TextView
+        TextView helloWorldTextView = findViewById(R.id.textView);
+
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String pickedColor = sharedPreferences.getString("color", "default");
+        if (pickedColor.equals("red")) {
+            helloWorldTextView.setBackgroundColor(getResources().getColor(R.color.red));
+        } else if (pickedColor.equals("yellow")) {
+            helloWorldTextView.setBackgroundColor(getResources().getColor(R.color.yellow));
+        } else {
+            helloWorldTextView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        }
     }
 
     @Override
@@ -64,6 +88,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         Log.i(TAG, "stopped");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "destroyed");
     }
 }
 
