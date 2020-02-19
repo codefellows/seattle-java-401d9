@@ -1,8 +1,22 @@
 package com.ferreirae.pokemon;
 
-class Pokemon {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
+public class Pokemon {
+
+    @PrimaryKey
+    public int id;
+
+    @ColumnInfo
     int level;
+
+    @ColumnInfo
     String type;
+
+    @ColumnInfo
     String name;
 
     public Pokemon(int level, String type, String name) {

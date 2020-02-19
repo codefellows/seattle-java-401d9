@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 
 import com.ferreirae.pokemon.dummy.DummyContent;
 import com.ferreirae.pokemon.dummy.DummyContent.DummyItem;
+import com.ferreirae.pokemon.room.AppDatabase;
+import com.ferreirae.pokemon.room.PokemonDAO;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -74,48 +77,12 @@ public class PokemonFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            List<Pokemon> listOfCoolPokemon = new ArrayList<>();
-            listOfCoolPokemon.add(new Pokemon(100, "fire", "Charizard"));
-            listOfCoolPokemon.add(new Pokemon(59, "electric", "Pikachu"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Squirtle"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Wartortle"));
-            listOfCoolPokemon.add(new Pokemon(100, "fire", "Charizard"));
-            listOfCoolPokemon.add(new Pokemon(59, "electric", "Pikachu"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Squirtle"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Wartortle"));
-            listOfCoolPokemon.add(new Pokemon(100, "fire", "Charizard"));
-            listOfCoolPokemon.add(new Pokemon(59, "electric", "Pikachu"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Squirtle"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Wartortle"));
-            listOfCoolPokemon.add(new Pokemon(100, "fire", "Charizard"));
-            listOfCoolPokemon.add(new Pokemon(59, "electric", "Pikachu"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Squirtle"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Wartortle"));
-            listOfCoolPokemon.add(new Pokemon(100, "fire", "Charizard"));
-            listOfCoolPokemon.add(new Pokemon(59, "electric", "Pikachu"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Squirtle"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Wartortle"));
-            listOfCoolPokemon.add(new Pokemon(100, "fire", "Charizard"));
-            listOfCoolPokemon.add(new Pokemon(59, "electric", "Pikachu"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Squirtle"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Wartortle"));
-            listOfCoolPokemon.add(new Pokemon(100, "fire", "Charizard"));
-            listOfCoolPokemon.add(new Pokemon(59, "electric", "Pikachu"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Squirtle"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Wartortle"));
-            listOfCoolPokemon.add(new Pokemon(100, "fire", "Charizard"));
-            listOfCoolPokemon.add(new Pokemon(59, "electric", "Pikachu"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Squirtle"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Wartortle"));
-            listOfCoolPokemon.add(new Pokemon(100, "fire", "Charizard"));
-            listOfCoolPokemon.add(new Pokemon(59, "electric", "Pikachu"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Squirtle"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Wartortle"));
-            listOfCoolPokemon.add(new Pokemon(100, "fire", "Charizard"));
-            listOfCoolPokemon.add(new Pokemon(59, "electric", "Pikachu"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Squirtle"));
-            listOfCoolPokemon.add(new Pokemon(59, "water", "Wartortle"));
-
+            AppDatabase db = Room.databaseBuilder(this.getContext().getApplicationContext(),
+                    AppDatabase.class, "pokemon")
+                    .allowMainThreadQueries()
+                    .build();
+            PokemonDAO dao = db.pokemonDAO();
+            List<Pokemon> listOfCoolPokemon = dao.getAll();
             recyclerView.setAdapter(new MyPokemonRecyclerViewAdapter(listOfCoolPokemon, null));
         }
         return view;

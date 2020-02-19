@@ -2,6 +2,7 @@ package com.ferreirae.pokemon;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.ferreirae.pokemon.room.AppDatabase;
+import com.ferreirae.pokemon.room.PokemonDAO;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +30,15 @@ public class MainActivity extends AppCompatActivity {
         // logging: verbose, debug, info, warning, error, wtf
         Log.d(TAG, "we are in onCreate");
 
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "pokemon")
+                .allowMainThreadQueries()
+                .build();
+        PokemonDAO dao = db.pokemonDAO();
+//        Pokemon p = new Pokemon(100, "fire", "Charizard");
+//        dao.addPokemon(p);
+        List<Pokemon> pokemonList = dao.getAll();
+        Log.i(TAG, pokemonList.toString());
 
         View b = findViewById(R.id.button);
         // anonymous inner class: define a class that implements View.OnClickListener, right here inline
