@@ -1,0 +1,6 @@
+type Pokemon @model {
+  id: ID!
+  name: String
+  type: String
+  level: Int
+}

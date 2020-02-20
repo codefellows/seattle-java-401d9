@@ -1,0 +1,24 @@
+# this is an auto generated file. This will be overwritten
+query GetPokemon($id: ID!) {
+  getPokemon(id: $id) {
+    id
+    name
+    type
+    level
+  }
+}
+query ListPokemons(
+  $filter: ModelPokemonFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPokemons(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      type
+      level
+    }
+    nextToken
+  }
+}

@@ -1,0 +1,25 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreatePokemon {
+  onCreatePokemon {
+    id
+    name
+    type
+    level
+  }
+}
+subscription OnUpdatePokemon {
+  onUpdatePokemon {
+    id
+    name
+    type
+    level
+  }
+}
+subscription OnDeletePokemon {
+  onDeletePokemon {
+    id
+    name
+    type
+    level
+  }
+}

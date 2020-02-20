@@ -4,6 +4,7 @@
 ### Android ###
 # Built application files
 *.apk
+!app-debug.apk
 *.ap_
 
 # Files for the ART/Dalvik VM

@@ -1,0 +1,14 @@
+{
+    "pokemonenv": {
+        "awscloudformation": {
+            "AuthRoleName": "pokemon-pokemonenv-20200219160044-authRole",
+            "UnauthRoleArn": "arn:aws:iam::092793752763:role/pokemon-pokemonenv-20200219160044-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::092793752763:role/pokemon-pokemonenv-20200219160044-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "pokemon-pokemonenv-20200219160044-deployment",
+            "UnauthRoleName": "pokemon-pokemonenv-20200219160044-unauthRole",
+            "StackName": "pokemon-pokemonenv-20200219160044",
+            "StackId": "arn:aws:cloudformation:us-west-2:092793752763:stack/pokemon-pokemonenv-20200219160044/0a558530-5374-11ea-bc7d-0a5c3e85f31a"
+        }
+    }
+}

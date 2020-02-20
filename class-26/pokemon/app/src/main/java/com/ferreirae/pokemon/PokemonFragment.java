@@ -9,10 +9,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.amazonaws.amplify.generated.graphql.ListPokemonsQuery;
+import com.amazonaws.mobile.config.AWSConfiguration;
+import com.amazonaws.mobileconnectors.appsync.AWSAppSyncClient;
+import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
+import com.apollographql.apollo.GraphQLCall;
+import com.apollographql.apollo.api.Response;
+import com.apollographql.apollo.exception.ApolloException;
 import com.ferreirae.pokemon.dummy.DummyContent;
 import com.ferreirae.pokemon.dummy.DummyContent.DummyItem;
 import com.ferreirae.pokemon.room.AppDatabase;
@@ -22,6 +32,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.annotation.Nonnull;
 
 /**
  * A fragment representing a list of Items.
@@ -36,6 +48,8 @@ public class PokemonFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private RecyclerView recyclerView;
+    private AWSAppSyncClient mAWSAppSyncClient;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -71,21 +85,44 @@ public class PokemonFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            AppDatabase db = Room.databaseBuilder(this.getContext().getApplicationContext(),
-                    AppDatabase.class, "pokemon")
-                    .allowMainThreadQueries()
-                    .build();
-            PokemonDAO dao = db.pokemonDAO();
-            List<Pokemon> listOfCoolPokemon = dao.getAll();
-            recyclerView.setAdapter(new MyPokemonRecyclerViewAdapter(listOfCoolPokemon, null));
         }
+        mAWSAppSyncClient = AWSAppSyncClient.builder()
+                .context(view.getContext().getApplicationContext())
+                .awsConfiguration(new AWSConfiguration(view.getContext().getApplicationContext()))
+                .build();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        mAWSAppSyncClient.query(ListPokemonsQuery.builder().build())
+                .responseFetcher(AppSyncResponseFetchers.NETWORK_FIRST)
+                .enqueue(new GraphQLCall.Callback<ListPokemonsQuery.Data>() {
+                    @Override
+                    public void onResponse(@Nonnull Response<ListPokemonsQuery.Data> response) {
+
+                        Handler h = new Handler(Looper.getMainLooper()){
+                            @Override
+                            public void handleMessage(Message inputMessage) {
+                                recyclerView.setAdapter(new MyPokemonRecyclerViewAdapter(response.data().listPokemons().items(), null));
+                            }
+                        };
+                        h.obtainMessage().sendToTarget();
+                    }
+
+                    @Override
+                    public void onFailure(@Nonnull ApolloException e) {
+
+                    }
+                });
     }
 
 

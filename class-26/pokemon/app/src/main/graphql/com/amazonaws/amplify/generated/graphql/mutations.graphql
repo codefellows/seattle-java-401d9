@@ -1,0 +1,25 @@
+# this is an auto generated file. This will be overwritten
+mutation CreatePokemon($input: CreatePokemonInput!) {
+  createPokemon(input: $input) {
+    id
+    name
+    type
+    level
+  }
+}
+mutation UpdatePokemon($input: UpdatePokemonInput!) {
+  updatePokemon(input: $input) {
+    id
+    name
+    type
+    level
+  }
+}
+mutation DeletePokemon($input: DeletePokemonInput!) {
+  deletePokemon(input: $input) {
+    id
+    name
+    type
+    level
+  }
+}

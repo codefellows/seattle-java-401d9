@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.amazonaws.amplify.generated.graphql.ListPokemonsQuery;
 import com.ferreirae.pokemon.PokemonFragment.OnListFragmentInteractionListener;
 import com.ferreirae.pokemon.dummy.DummyContent.DummyItem;
 
@@ -21,10 +22,10 @@ import java.util.List;
 public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemonRecyclerViewAdapter.ViewHolder> {
 
     static final String TAG = "mnf.ViewAdapter";
-    private final List<Pokemon> mValues;
+    private final List<ListPokemonsQuery.Item> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyPokemonRecyclerViewAdapter(List<Pokemon> items, OnListFragmentInteractionListener listener) {
+    public MyPokemonRecyclerViewAdapter(List<ListPokemonsQuery.Item> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -41,9 +42,9 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mNameView.setText(mValues.get(position).getName());
-        holder.mLevelView.setText("" + mValues.get(position).getLevel());
-        holder.mTypeView.setText(mValues.get(position).getType());
+        holder.mNameView.setText(mValues.get(position).name());
+        holder.mLevelView.setText("" + mValues.get(position).level());
+        holder.mTypeView.setText(mValues.get(position).type());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +64,7 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
         public final TextView mNameView;
         public final TextView mLevelView;
         public final TextView mTypeView;
-        public Pokemon mItem;
+        public ListPokemonsQuery.Item mItem;
 
         public ViewHolder(View view) {
             super(view);
