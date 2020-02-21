@@ -12,13 +12,16 @@ import androidx.room.Room;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.amazonaws.amplify.generated.graphql.ListPokemonsQuery;
+import com.amazonaws.amplify.generated.graphql.OnCreatePokemonSubscription;
 import com.amazonaws.mobile.config.AWSConfiguration;
 import com.amazonaws.mobileconnectors.appsync.AWSAppSyncClient;
+import com.amazonaws.mobileconnectors.appsync.AppSyncSubscriptionCall;
 import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
 import com.apollographql.apollo.GraphQLCall;
 import com.apollographql.apollo.api.Response;
@@ -50,6 +53,7 @@ public class PokemonFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private RecyclerView recyclerView;
     private AWSAppSyncClient mAWSAppSyncClient;
+    private MyPokemonRecyclerViewAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -96,6 +100,25 @@ public class PokemonFragment extends Fragment {
                 .context(view.getContext().getApplicationContext())
                 .awsConfiguration(new AWSConfiguration(view.getContext().getApplicationContext()))
                 .build();
+
+        OnCreatePokemonSubscription subscription = OnCreatePokemonSubscription.builder().build();
+        AppSyncSubscriptionCall<OnCreatePokemonSubscription.Data> subscriptionWatcher = mAWSAppSyncClient.subscribe(subscription);
+        subscriptionWatcher.execute(new AppSyncSubscriptionCall.Callback<OnCreatePokemonSubscription.Data>() {
+            @Override
+            public void onResponse(@Nonnull Response<OnCreatePokemonSubscription.Data> response) {
+                Log.i("mnf.Subscription", response.data().toString());
+            }
+
+            @Override
+            public void onFailure(@Nonnull ApolloException e) {
+                Log.e("mnf.Subscription", e.toString());
+            }
+
+            @Override
+            public void onCompleted() {
+                Log.i("mnf.Subscription", "Subscription completed");
+            }
+        });
         return view;
     }
 
@@ -108,11 +131,19 @@ public class PokemonFragment extends Fragment {
                 .enqueue(new GraphQLCall.Callback<ListPokemonsQuery.Data>() {
                     @Override
                     public void onResponse(@Nonnull Response<ListPokemonsQuery.Data> response) {
-
+                        // code that is here is running on the background thread
+                        Log.i("mnf", "this is logging from the background!");
+                        // send this bit of code to the UI thread, so it can run there
                         Handler h = new Handler(Looper.getMainLooper()){
                             @Override
                             public void handleMessage(Message inputMessage) {
-                                recyclerView.setAdapter(new MyPokemonRecyclerViewAdapter(response.data().listPokemons().items(), null));
+                                // code inside of handleMessage will run on the UI thread! hooray!
+                                if(adapter == null) {
+                                    adapter = new MyPokemonRecyclerViewAdapter(null, mListener);
+                                    recyclerView.setAdapter(adapter);
+                                }
+                                adapter.setItems(response.data().listPokemons().items());
+                                adapter.notifyDataSetChanged();
                             }
                         };
                         h.obtainMessage().sendToTarget();

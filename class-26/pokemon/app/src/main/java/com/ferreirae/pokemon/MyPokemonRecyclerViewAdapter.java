@@ -22,12 +22,16 @@ import java.util.List;
 public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemonRecyclerViewAdapter.ViewHolder> {
 
     static final String TAG = "mnf.ViewAdapter";
-    private final List<ListPokemonsQuery.Item> mValues;
+    private List<ListPokemonsQuery.Item> mValues;
     private final OnListFragmentInteractionListener mListener;
 
     public MyPokemonRecyclerViewAdapter(List<ListPokemonsQuery.Item> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
+    }
+
+    public void setItems(List<ListPokemonsQuery.Item> items) {
+        this.mValues = items;
     }
 
     // creates a new row
