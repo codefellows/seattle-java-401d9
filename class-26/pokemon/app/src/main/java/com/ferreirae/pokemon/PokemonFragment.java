@@ -17,6 +17,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.amazonaws.amplify.generated.graphql.CreateBattleSquadMutation;
+import com.amazonaws.amplify.generated.graphql.GetBattleSquadQuery;
+import com.amazonaws.amplify.generated.graphql.ListBattleSquadsQuery;
 import com.amazonaws.amplify.generated.graphql.ListPokemonsQuery;
 import com.amazonaws.amplify.generated.graphql.OnCreatePokemonSubscription;
 import com.amazonaws.mobile.config.AWSConfiguration;
@@ -37,6 +40,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+
+import type.CreateBattleSquadInput;
+
+import static com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers.NETWORK_FIRST;
 
 /**
  * A fragment representing a list of Items.
@@ -125,9 +132,32 @@ public class PokemonFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.i("mnf", "about to make the query to get the battle squad");
+
+        mAWSAppSyncClient.query(
+                // builder pattern is like a drawn-out constructor with variable arguments
+                // new GetBattleSquadQuery("c6a...")
+                GetBattleSquadQuery.builder()
+                .id("c6a71067-fe5c-48c9-9171-f7f7f9d6d709")
+                .build())
+                .responseFetcher(NETWORK_FIRST)
+                .enqueue(new GraphQLCall.Callback<GetBattleSquadQuery.Data>() {
+                    @Override
+                    public void onResponse(@Nonnull Response<GetBattleSquadQuery.Data> response) {
+                        Log.i("mnf.pokemon", "we got data!" + response.data());
+                        for (GetBattleSquadQuery.Item i : response.data().getBattleSquad().pokemons().items()) {
+                            Log.i("mnf.pokemon", i.name() + " " + i.type());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@Nonnull ApolloException e) {
+                        Log.e("mnf", "failed to get battle squad");
+                    }
+                });
 
         mAWSAppSyncClient.query(ListPokemonsQuery.builder().build())
-                .responseFetcher(AppSyncResponseFetchers.NETWORK_FIRST)
+                .responseFetcher(NETWORK_FIRST)
                 .enqueue(new GraphQLCall.Callback<ListPokemonsQuery.Data>() {
                     @Override
                     public void onResponse(@Nonnull Response<ListPokemonsQuery.Data> response) {

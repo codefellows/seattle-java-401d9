@@ -5,6 +5,13 @@ mutation CreatePokemon($input: CreatePokemonInput!) {
     name
     type
     level
+    squad {
+      id
+      name
+      pokemons {
+        nextToken
+      }
+    }
   }
 }
 mutation UpdatePokemon($input: UpdatePokemonInput!) {
@@ -13,6 +20,13 @@ mutation UpdatePokemon($input: UpdatePokemonInput!) {
     name
     type
     level
+    squad {
+      id
+      name
+      pokemons {
+        nextToken
+      }
+    }
   }
 }
 mutation DeletePokemon($input: DeletePokemonInput!) {
@@ -21,5 +35,57 @@ mutation DeletePokemon($input: DeletePokemonInput!) {
     name
     type
     level
+    squad {
+      id
+      name
+      pokemons {
+        nextToken
+      }
+    }
+  }
+}
+mutation CreateBattleSquad($input: CreateBattleSquadInput!) {
+  createBattleSquad(input: $input) {
+    id
+    name
+    pokemons {
+      items {
+        id
+        name
+        type
+        level
+      }
+      nextToken
+    }
+  }
+}
+mutation UpdateBattleSquad($input: UpdateBattleSquadInput!) {
+  updateBattleSquad(input: $input) {
+    id
+    name
+    pokemons {
+      items {
+        id
+        name
+        type
+        level
+      }
+      nextToken
+    }
+  }
+}
+mutation DeleteBattleSquad($input: DeleteBattleSquadInput!) {
+  deleteBattleSquad(input: $input) {
+    id
+    name
+    pokemons {
+      items {
+        id
+        name
+        type
+        level
+      }
+      nextToken
+    }
   }
 }

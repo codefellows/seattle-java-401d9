@@ -23,6 +23,9 @@ public class Pokemon {
         this.level = level;
         this.type = type;
         this.name = name;
+
+        State s = State.ACCEPTED;
+
     }
 
     public int getLevel() {

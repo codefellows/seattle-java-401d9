@@ -3,4 +3,11 @@ type Pokemon @model {
   name: String
   type: String
   level: Int
+  squad: BattleSquad @connection(name: "Potato")
+}
+
+type BattleSquad @model {
+    id: ID!
+    name: String
+    pokemons: [Pokemon] @connection(name: "Potato")
 }

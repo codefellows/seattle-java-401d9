@@ -51,6 +51,7 @@ public class CatchPokemon extends AppCompatActivity {
                 .level(level)
                 .name(pokemonName)
                 .type(type)
+                .pokemonSquadId("c6a71067-fe5c-48c9-9171-f7f7f9d6d709")
                 .build();
         mAWSAppSyncClient.mutate(CreatePokemonMutation.builder().input(input).build()).enqueue(
                 new GraphQLCall.Callback<CreatePokemonMutation.Data>() {

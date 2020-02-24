@@ -5,6 +5,13 @@ subscription OnCreatePokemon {
     name
     type
     level
+    squad {
+      id
+      name
+      pokemons {
+        nextToken
+      }
+    }
   }
 }
 subscription OnUpdatePokemon {
@@ -13,6 +20,13 @@ subscription OnUpdatePokemon {
     name
     type
     level
+    squad {
+      id
+      name
+      pokemons {
+        nextToken
+      }
+    }
   }
 }
 subscription OnDeletePokemon {
@@ -21,5 +35,57 @@ subscription OnDeletePokemon {
     name
     type
     level
+    squad {
+      id
+      name
+      pokemons {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnCreateBattleSquad {
+  onCreateBattleSquad {
+    id
+    name
+    pokemons {
+      items {
+        id
+        name
+        type
+        level
+      }
+      nextToken
+    }
+  }
+}
+subscription OnUpdateBattleSquad {
+  onUpdateBattleSquad {
+    id
+    name
+    pokemons {
+      items {
+        id
+        name
+        type
+        level
+      }
+      nextToken
+    }
+  }
+}
+subscription OnDeleteBattleSquad {
+  onDeleteBattleSquad {
+    id
+    name
+    pokemons {
+      items {
+        id
+        name
+        type
+        level
+      }
+      nextToken
+    }
   }
 }

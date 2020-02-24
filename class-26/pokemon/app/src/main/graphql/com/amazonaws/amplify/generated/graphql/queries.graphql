@@ -5,6 +5,13 @@ query GetPokemon($id: ID!) {
     name
     type
     level
+    squad {
+      id
+      name
+      pokemons {
+        nextToken
+      }
+    }
   }
 }
 query ListPokemons(
@@ -18,6 +25,41 @@ query ListPokemons(
       name
       type
       level
+      squad {
+        id
+        name
+      }
+    }
+    nextToken
+  }
+}
+query GetBattleSquad($id: ID!) {
+  getBattleSquad(id: $id) {
+    id
+    name
+    pokemons {
+      items {
+        id
+        name
+        type
+        level
+      }
+      nextToken
+    }
+  }
+}
+query ListBattleSquads(
+  $filter: ModelBattleSquadFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBattleSquads(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      pokemons {
+        nextToken
+      }
     }
     nextToken
   }
