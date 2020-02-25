@@ -13,5 +13,14 @@
                 }
             }
         }
+    },
+    "storage": {
+        "plugins": {
+            "awsS3StoragePlugin": {
+                "bucket": "pokemon509b86813b724d9fbf54b5c0564f30c1",
+                "region": "us-west-2",
+                "defaultAccessLevel": "guest"
+            }
+        }
     }
 }
