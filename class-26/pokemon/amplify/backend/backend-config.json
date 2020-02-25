@@ -16,5 +16,12 @@
 				}
 			}
 		}
+	},
+	"auth": {
+		"pokemon9f1c085b": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
 	}
 }

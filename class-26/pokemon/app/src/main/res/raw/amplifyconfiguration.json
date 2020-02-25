@@ -1,0 +1,17 @@
+{
+    "UserAgent": "aws-amplify-cli/2.0",
+    "Version": "1.0",
+    "api": {
+        "plugins": {
+            "awsAPIPlugin": {
+                "pokemon": {
+                    "endpointType": "GraphQL",
+                    "endpoint": "https://zeq6a4knqvdkzftrggw4gahv4q.appsync-api.us-west-2.amazonaws.com/graphql",
+                    "region": "us-west-2",
+                    "authorizationType": "API_KEY",
+                    "apiKey": "da2-bis223dukngu3asmukbgvseaa4"
+                }
+            }
+        }
+    }
+}

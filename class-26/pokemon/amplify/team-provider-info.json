@@ -8,7 +8,13 @@
             "DeploymentBucketName": "pokemon-pokemonenv-20200219160044-deployment",
             "UnauthRoleName": "pokemon-pokemonenv-20200219160044-unauthRole",
             "StackName": "pokemon-pokemonenv-20200219160044",
-            "StackId": "arn:aws:cloudformation:us-west-2:092793752763:stack/pokemon-pokemonenv-20200219160044/0a558530-5374-11ea-bc7d-0a5c3e85f31a"
+            "StackId": "arn:aws:cloudformation:us-west-2:092793752763:stack/pokemon-pokemonenv-20200219160044/0a558530-5374-11ea-bc7d-0a5c3e85f31a",
+            "AmplifyAppId": "d1zshr96db29jg"
+        },
+        "categories": {
+            "auth": {
+                "pokemon9f1c085b": {}
+            }
         }
     }
 }
