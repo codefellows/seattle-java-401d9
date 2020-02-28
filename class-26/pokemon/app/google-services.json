@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "908870309390",
+    "firebase_url": "https://pokemon-88e16.firebaseio.com",
+    "project_id": "pokemon-88e16",
+    "storage_bucket": "pokemon-88e16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908870309390:android:d97422c494427597638e5f",
+        "android_client_info": {
+          "package_name": "com.ferreirae.pokemon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "908870309390-eutjoou6s048bcmj0u4ru00jal85mevp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1wf7YaJVdLNMD5YhN-pPeTquwcOPgkK4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "908870309390-eutjoou6s048bcmj0u4ru00jal85mevp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

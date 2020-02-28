@@ -1,6 +1,6 @@
 {
     "identityPoolName": "pokemon9f1c085b_identitypool_9f1c085b",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "pokemo9f1c085b",
     "userPoolName": "pokemon9f1c085b_userpool_9f1c085b",
     "autoVerifiedAttributes": [

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.amazonaws.appsync'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -48,6 +49,14 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     androidTestImplementation 'androidx.test:rules:1.2.0-beta01'
 
+
+    // Overrides an auth dependency to ensure correct behavior
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.3.0'
+
+    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.15.+'
     // AWS Amplify dependencies
     //Base SDK
     implementation 'com.amazonaws:aws-android-sdk-core:2.15.+'

@@ -14,6 +14,13 @@
         "categories": {
             "auth": {
                 "pokemon9f1c085b": {}
+            },
+            "notifications": {
+                "Pinpoint": {
+                    "Name": "pokemonEdBre-pokemonenv",
+                    "Id": "600b219a8b7241e6afeb0881d1b5f2ec",
+                    "Region": "us-west-2"
+                }
             }
         }
     }

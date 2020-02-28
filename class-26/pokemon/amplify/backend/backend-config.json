@@ -1,33 +1,41 @@
 {
-	"api": {
-		"pokemon": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"authConfig": {
-					"additionalAuthenticationProviders": [],
-					"defaultAuthentication": {
-						"authenticationType": "API_KEY",
-						"apiKeyConfig": {
-							"description": "connecting to pokemon api",
-							"apiKeyExpirationDays": 7
-						}
-					}
-				}
-			}
-		}
-	},
-	"auth": {
-		"pokemon9f1c085b": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": []
-		}
-	},
-	"storage": {
-		"pokemonPictures": {
-			"service": "S3",
-			"providerPlugin": "awscloudformation"
-		}
-	}
+    "api": {
+        "pokemon": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "additionalAuthenticationProviders": [],
+                    "defaultAuthentication": {
+                        "authenticationType": "API_KEY",
+                        "apiKeyConfig": {
+                            "description": "connecting to pokemon api",
+                            "apiKeyExpirationDays": 7
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "auth": {
+        "pokemon9f1c085b": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": []
+        }
+    },
+    "storage": {
+        "pokemonPictures": {
+            "service": "S3",
+            "providerPlugin": "awscloudformation"
+        }
+    },
+    "notifications": {
+        "pokemonEdBre": {
+            "service": "Pinpoint",
+            "channels": [
+                "FCM"
+            ]
+        }
+    }
 }

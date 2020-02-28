@@ -1,9 +1,11 @@
 package com.ferreirae.pokemon;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +18,9 @@ import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
 import com.amazonaws.mobile.client.UserState;
 import com.amazonaws.mobile.client.UserStateDetails;
+import com.amazonaws.mobile.config.AWSConfiguration;
+import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
+import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferService;
@@ -24,6 +29,10 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.ferreirae.pokemon.room.AppDatabase;
 import com.ferreirae.pokemon.room.PokemonDAO;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -33,6 +42,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     static String TAG = "mnf.main";
+
+    private static PinpointManager pinpointManager;
     @Override
     // Bundle
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         // setup work
         // logging: verbose, debug, info, warning, error, wtf
         Log.d(TAG, "we are in onCreate");
+
+        getPinpointManager(getApplicationContext());
 
         View b = findViewById(R.id.button);
         // anonymous inner class: define a class that implements View.OnClickListener, right here inline
@@ -206,6 +219,46 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "Bytes Transferred: " + uploadObserver.getBytesTransferred());
         Log.d(TAG, "Bytes Total: " + uploadObserver.getBytesTotal());
+    }
+
+
+    public static PinpointManager getPinpointManager(final Context applicationContext) {
+        if (pinpointManager == null) {
+            final AWSConfiguration awsConfig = new AWSConfiguration(applicationContext);
+            AWSMobileClient.getInstance().initialize(applicationContext, awsConfig, new Callback<UserStateDetails>() {
+                @Override
+                public void onResult(UserStateDetails userStateDetails) {
+                    Log.i("INIT", userStateDetails.getUserState().toString());
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    Log.e("INIT", "Initialization error.", e);
+                }
+            });
+
+            PinpointConfiguration pinpointConfig = new PinpointConfiguration(
+                    applicationContext,
+                    AWSMobileClient.getInstance(),
+                    awsConfig);
+
+            pinpointManager = new PinpointManager(pinpointConfig);
+
+            FirebaseInstanceId.getInstance().getInstanceId()
+                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                            if (!task.isSuccessful()) {
+                                Log.w(TAG, "getInstanceId failed", task.getException());
+                                return;
+                            }
+                            final String token = task.getResult().getToken();
+                            Log.d(TAG, "Registering push notifications token: " + token);
+                            pinpointManager.getNotificationClient().registerDeviceToken(token);
+                        }
+                    });
+        }
+        return pinpointManager;
     }
 }
 
