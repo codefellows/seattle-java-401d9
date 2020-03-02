@@ -14,6 +14,7 @@
 
 - Android labs
 - Practice whiteboards (in lecture & with partners)
+- TAs
 
 ### The Mixed
 
