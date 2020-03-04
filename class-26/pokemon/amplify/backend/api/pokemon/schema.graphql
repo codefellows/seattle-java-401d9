@@ -3,6 +3,7 @@ type Pokemon @model {
   name: String
   type: String
   level: Int
+  captureLocation: String
   squad: BattleSquad @connection(name: "Potato")
 }
 

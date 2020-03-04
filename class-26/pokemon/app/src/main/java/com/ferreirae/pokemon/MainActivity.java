@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.amazonaws.amplify.generated.graphql.ListPokemonsQuery;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
 import com.amazonaws.mobile.client.UserState;
@@ -38,6 +39,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.List;
+
+import type.ModelPokemonFilterInput;
+import type.ModelStringFilterInput;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -127,6 +131,13 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.i(TAG, "resumed");
 
+        ListPokemonsQuery query = ListPokemonsQuery.builder()
+                .filter(ModelPokemonFilterInput.builder()
+                        .name(ModelStringFilterInput.builder()
+                                .eq("Bulbasaur")
+                                .build())
+                        .build())
+                .build();
         // set color scheme of the TextView
         TextView helloWorldTextView = findViewById(R.id.textView);
 
