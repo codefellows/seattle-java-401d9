@@ -28,6 +28,26 @@ public class Tree<T> {
   }
   private Node<T> root;
 
+  public static String getLongest(Tree<String> tree) {
+    return getLongest(tree.root);
+  }
+
+  public static String getLongest(Node<String> root) {
+    String answer = root.value;
+    if(root.left != null) {
+      String leftLongest = getLongest(root.left);
+      if(leftLongest.length() > answer.length()) {
+        answer = leftLongest;
+      }
+    }
+    if(root.right != null) {
+      String rightLongest = getLongest(root.right);
+      if(rightLongest.length() > answer.length()) {
+        answer = rightLongest;
+      }
+    }
+    return answer;
+  }
   public Tree() {
     this.root = null;
   }
@@ -62,8 +82,8 @@ public class Tree<T> {
     //   /
     //  leaf
     Tree<String> t = new Tree<>(new Node<>("root",
-      new Node<>("l", new Node<>("leaf"), null),
-      new Node<>("r")
+      new Node<>("wow this is a long string", new Node<>("leaf"), null),
+      new Node<>("right")
     ));
 
     Tree<Integer> start = new Tree<>(new Node<>(4,
@@ -72,13 +92,14 @@ public class Tree<T> {
     ));
 
 
-    List<Integer> bf = start.breadthFirst();
-    System.out.println(bf);
-    System.out.println(t.breadthFirst());
+    // List<Integer> bf = start.breadthFirst();
+    // System.out.println(bf);
+    // System.out.println(t.breadthFirst());
     // System.out.println(start);
 
     // Tree<String> result = fizzBuzz(start);
     // System.out.println(result);
+    System.out.println(getLongest(t));
   }
 
   public List<T> breadthFirst() {
